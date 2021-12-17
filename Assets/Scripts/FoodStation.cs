@@ -32,20 +32,19 @@ public class FoodStation : MonoBehaviour
             }
         }
     }
-    private void Update()
+    private void FixedUpdate()
     {
         // make sure the chicken is within range and there isn't currently any uneaten food from this dispenser hanging about
 
         if (chickenIsClose)
         {
-            // see if it needs to be fed or amused
+            // see whether it needs to be fed or amused
             if(currentlyDispensedFood == null)
             {
                 if (chicken.IsHungry)
                 {
                     // Toss the food out so the chicken can eat it
                     Dispense(foodPrefab);
-
                 }
                 else
                 {
@@ -67,14 +66,6 @@ public class FoodStation : MonoBehaviour
         {
             // chicken moved away - reset the need for a new joke so it will get one if it comes back
             needNewJoke = true;
-            
-        }
-
-        // TESTING
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Dispense(foodPrefab);
-            //Debug.Log($"Is the chicken hungry?: {chicken.IsHungry}");
         }
     }
 
@@ -116,16 +107,18 @@ public class FoodStation : MonoBehaviour
 
     private IEnumerator LaunchFood()
     {
-        // Open the lid (wait until it is open)
-        hingeAnimator.SetTrigger("OpenLid");
+        // Play lid animation
+        hingeAnimator.SetTrigger("UseLid");
+        //hingeAnimator.SetBool("LidIsOpen", true);
+
+        // Wait for lid to be open enough to launch food
         yield return new WaitForSeconds(1);
 
-        // Launch the food (and give it time to clear the lid)
+        // Launch the food
         Rigidbody foodRB = currentlyDispensedFood.GetComponent<Rigidbody>();
         foodRB.AddForce(launchDirection * tossForce, ForceMode.Impulse);
-        yield return new WaitForSeconds(3);
 
-        // Close the lid
-        hingeAnimator.SetTrigger("CloseLid");
+        // Lid will close automatically as part of the animation
+        //hingeAnimator.SetBool("LidIsOpen", false);
     }
 }

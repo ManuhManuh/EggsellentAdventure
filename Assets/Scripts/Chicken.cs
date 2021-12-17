@@ -72,13 +72,6 @@ public class Chicken : MonoBehaviour
             animator.SetBool("Walking", true);
         }
 
-        // TESTING
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //InitiateLaying();
-        }
-
     }
 
     private void MoveToClickedSpot()

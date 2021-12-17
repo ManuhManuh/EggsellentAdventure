@@ -109,5 +109,4 @@ public class GameManager : MonoBehaviour
         return laidEggType == winningEggType;
     }
 
-
 }

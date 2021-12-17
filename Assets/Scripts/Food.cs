@@ -26,6 +26,10 @@ public class Food : MonoBehaviour
             // Eaten by the chicken that ran into it
             chicken.Eat(this, foodValue);
         }
+        else if (collision.gameObject.CompareTag("Barrier"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
 

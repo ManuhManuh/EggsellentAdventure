@@ -20,4 +20,10 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("TitleScene");
     }
+
+    public void QuitLikeAChicken()
+    {
+        Application.Quit();
+    }
+
 }
